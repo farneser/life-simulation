@@ -17,4 +17,9 @@ public abstract class Entity {
     public void setCoordinates(Coordinates coordinates) {
         _coordinates = coordinates;
     }
+
+    @Override
+    public String toString() {
+        return "Entity\n\tcoordinates: " + getCoordinates();
+    }
 }
