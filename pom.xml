@@ -25,11 +25,15 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <groupId>com.farneser</groupId>
+        <artifactId>life-simulation</artifactId>
+        <version>1.0-SNAPSHOT</version>
         <configuration>
-          <source>14</source>
-          <target>14</target>
+          <archive>
+            <manifest>
+              <mainClass>com.farneser.App</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
