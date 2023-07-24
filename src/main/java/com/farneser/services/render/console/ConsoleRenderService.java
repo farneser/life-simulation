@@ -3,20 +3,19 @@ package com.farneser.services.render.console;
 import com.farneser.Coordinates;
 import com.farneser.Map;
 import com.farneser.entity.Entity;
-import com.farneser.services.render.RenderService;
+import com.farneser.services.render.IRender;
 
-public class ConsoleRenderService extends RenderService {
+public class ConsoleRenderService implements IRender {
     public ConsoleRenderService() {
         super();
     }
 
     @Override
     public void render(Map map) {
-        for (var x = 0; x < map.width; x++) {
-            for (var y = 0; y < map.height; y++) {
+        for (var y = 0; y < map.height; y++) {
+            for (var x = 0; x < map.width; x++) {
                 var coordinates = new Coordinates(x, y);
                 var entity = map.getEntityAt(coordinates);
-
                 System.out.print(selectUnicodeSpriteForEntity(entity) + " ");
             }
 

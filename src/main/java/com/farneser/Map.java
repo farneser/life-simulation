@@ -53,10 +53,7 @@ public class Map {
         setEntityAt(to, entity);
     }
 
-
     public void render() {
         _render.render(this);
     }
-
-
 }
