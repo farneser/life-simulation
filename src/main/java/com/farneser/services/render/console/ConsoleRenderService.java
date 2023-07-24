@@ -1,8 +1,9 @@
-package com.farneser.services.render;
+package com.farneser.services.render.console;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
 import com.farneser.entity.Entity;
+import com.farneser.services.render.RenderService;
 
 public class ConsoleRenderService extends RenderService {
     public ConsoleRenderService(Map map) {

@@ -12,5 +12,4 @@ public abstract class RenderService implements IRender {
     public void render() {
         render(_map);
     }
-
 }
