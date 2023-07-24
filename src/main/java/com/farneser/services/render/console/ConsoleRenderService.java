@@ -13,21 +13,27 @@ public class ConsoleRenderService extends RenderService {
     @Override
     public void render(Map map) {
         for (var x = 0; x < map.width; x++) {
-            for (var y = 0; y < map.width; y++) {
+            for (var y = 0; y < map.height; y++) {
                 var coordinates = new Coordinates(x, y);
                 var entity = map.getEntityAt(coordinates);
-                var renderText = "";
 
-                if (entity == null) {
-                    renderText = "... ";
-                } else {
-                    renderText = "ent ";
-                }
-
-                System.out.print(renderText);
+                System.out.print(selectUnicodeSpriteForEntity(entity) + " ");
             }
 
             System.out.println();
         }
+    }
+
+    private String selectUnicodeSpriteForEntity(Entity entity) {
+        if (entity == null) return "..";
+
+        return switch (entity.getClass().getSimpleName()) {
+            case "Grass" -> "\uD83C\uDF3F";
+            case "Rock" -> "\uD83E\uDEA8";
+            case "Tree" -> "\uD83C\uDF33";
+            case "Herbivore" -> "\uD83D\uDC14";
+            case "Predator" -> "\uD83D\uDC3A";
+            default -> "..";
+        };
     }
 }
