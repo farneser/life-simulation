@@ -12,4 +12,9 @@ public class Herbivore extends Creature {
     public void makeMove(Coordinates currentCell) {
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\n\ttype: herbivore";
+    }
 }
