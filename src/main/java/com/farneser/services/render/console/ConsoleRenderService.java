@@ -6,8 +6,8 @@ import com.farneser.entity.Entity;
 import com.farneser.services.render.RenderService;
 
 public class ConsoleRenderService extends RenderService {
-    public ConsoleRenderService(Map map) {
-        super(map);
+    public ConsoleRenderService() {
+        super();
     }
 
     @Override
@@ -18,9 +18,9 @@ public class ConsoleRenderService extends RenderService {
                 var entity = map.getEntityAt(coordinates);
                 var renderText = "";
 
-                if (entity == null){
+                if (entity == null) {
                     renderText = "... ";
-                }else{
+                } else {
                     renderText = "ent ";
                 }
 
