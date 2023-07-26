@@ -9,7 +9,7 @@ public abstract class Creature extends Entity {
     public final int speed;
     public final int hp;
     public final IPathFinder pathFinder;
-    private final Map _map;
+    protected final Map _map;
     public Creature(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
         super(coordinates);
         this.speed = speed;
@@ -18,7 +18,7 @@ public abstract class Creature extends Entity {
         _map = map;
     }
 
-    abstract public void makeMove(Coordinates currentCell);
+    abstract public void makeMove();
 
     public boolean isAlive() {
         return hp > 0;

@@ -4,7 +4,7 @@ import com.farneser.Coordinates;
 
 public abstract class Entity {
 
-    private Coordinates _coordinates;
+    protected Coordinates _coordinates;
 
     public Entity(Coordinates coordinates) {
         _coordinates = coordinates;

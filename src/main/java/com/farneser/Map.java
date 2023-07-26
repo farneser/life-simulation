@@ -30,7 +30,7 @@ public class Map {
             for (int y = 0; y < height; y++) {
                 if (random.nextInt(10) != 0) continue;
                 var coordinates = new Coordinates(x, y);
-                _entities.put(coordinates, entityFactory.getRandomEntity(coordinates));
+                _entities.put(coordinates, entityFactory.getRandomEntity(coordinates, this));
             }
         }
     }
@@ -92,5 +92,10 @@ public class Map {
         var map = new Map(20, 10, new ConsoleRenderService());
 
         map.getCreatures().forEach((coordinates, creature) -> System.out.println(creature));
+    }
+
+    @Override
+    public String toString() {
+        return "Map\n\twidth " + width + "\n\theight " + height;
     }
 }

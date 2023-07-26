@@ -34,10 +34,10 @@ public class EntityFactory {
                 return new Tree(coordinates);
             }
             case 3 -> {
-                return new Herbivore(coordinates, new Random().nextInt(5), new Random().nextInt(5), new BfsPathFinderService(), map);
+                return new Herbivore(coordinates, new Random().nextInt(5), new Random().nextInt(5), new BfsPathFinderService(map), map);
             }
             case 4 -> {
-                return new Predator(coordinates, new Random().nextInt(5), new Random().nextInt(5), new BfsPathFinderService(), map);
+                return new Predator(coordinates, new Random().nextInt(5), new Random().nextInt(5), new BfsPathFinderService(map), map);
             }
         }
 
