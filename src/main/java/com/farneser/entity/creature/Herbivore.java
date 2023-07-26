@@ -10,7 +10,7 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove(Coordinates currentCell) {
-
+        System.out.println("herbivore moved");
     }
 
     @Override

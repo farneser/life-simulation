@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Coordinates {
 
-    private int _x;
-    private int _y;
+    private final int _x;
+    private final int _y;
 
     public Coordinates(int x, int y) {
         _x = x;
