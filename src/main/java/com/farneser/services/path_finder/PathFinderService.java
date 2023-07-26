@@ -2,10 +2,17 @@ package com.farneser.services.path_finder;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
+import com.farneser.entity.Entity;
+import com.farneser.entity.Grass;
+import com.farneser.entity.Rock;
+import com.farneser.entity.Tree;
+import com.farneser.entity.creature.Herbivore;
+import com.farneser.entity.creature.Predator;
 import com.farneser.services.render.console.ConsoleRenderService;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class PathFinderService implements IPathFinder {
     protected final Map _map;
@@ -14,12 +21,19 @@ public abstract class PathFinderService implements IPathFinder {
         _map = map;
     }
 
-    public boolean isGrassNear(Coordinates coordinates) {
+    protected <T extends Entity> Coordinates isEntityNear(Coordinates coordinates, Class<T> type) {
 
-        var cells = coordinatesToCheck(coordinates);
+        var coordinatesToCheck = coordinatesToCheck(coordinates);
+        AtomicReference<Coordinates> result = new AtomicReference<>();
+        coordinatesToCheck.forEach(coordinatesAround -> {
+            var entity = _map.getEntityAt(coordinatesAround);
+            if (entity == null) return;
+            if (entity.getClass() == type) {
+                result.set(entity.getCoordinates());
+            }
+        });
 
-
-        return false;
+        return result.get();
     }
 
     protected Set<Coordinates> coordinatesToCheck(Coordinates coordinates) {
@@ -39,10 +53,16 @@ public abstract class PathFinderService implements IPathFinder {
     }
 
     public static void main(String[] args) {
-        var bfs = new BfsPathFinderService(new Map(5, 5, new ConsoleRenderService()));
-
+        var bfs = new BfsPathFinderService(new Map(3, 3, new ConsoleRenderService()));
 
         bfs.coordinatesToCheck(new Coordinates(2, 2)).forEach(System.out::println);
+        bfs._map.render();
+
+        System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Grass.class));
+        System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Rock.class));
+        System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Predator.class));
+        System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Tree.class));
+        System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Herbivore.class));
 
     }
 }
