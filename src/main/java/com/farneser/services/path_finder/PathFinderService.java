@@ -7,12 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class PathFinderService implements IPathFinder {
-
-    private final Map _map;
-
-    public PathFinderService(Map map) {
-        _map = map;
-    }
+    private Map _map;
+    public PathFinderService() {}
 
     protected Set<Coordinates> cellsToCheck(Coordinates coordinates) {
         var result = new HashSet<Coordinates>();
@@ -25,5 +21,9 @@ public abstract class PathFinderService implements IPathFinder {
         }
 
         return result;
+    }
+
+    public void setMap(Map map){
+        _map = map;
     }
 }

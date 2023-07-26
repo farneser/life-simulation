@@ -1,5 +1,10 @@
 package com.farneser.services.path_finder;
 
-public interface IPathFinder {
+import com.farneser.Coordinates;
+import com.farneser.Map;
 
+import java.util.Deque;
+
+public interface IPathFinder {
+    Deque<Coordinates> findPathTo(Map map, Coordinates from, Coordinates to);
 }
