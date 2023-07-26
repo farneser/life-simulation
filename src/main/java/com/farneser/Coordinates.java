@@ -28,6 +28,10 @@ public class Coordinates {
         return _x == that._x && _y == that._y;
     }
 
+    public double getDistance(Coordinates coordinates) {
+        return Math.sqrt(Math.pow(getX() - coordinates.getX(), 2) + Math.pow(getY() - coordinates.getY(), 2));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(_x, _y);
