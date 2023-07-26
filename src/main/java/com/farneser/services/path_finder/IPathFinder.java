@@ -6,5 +6,5 @@ import com.farneser.Map;
 import java.util.Deque;
 
 public interface IPathFinder {
-    Deque<Coordinates> findPathTo(Map map, Coordinates from, Coordinates to);
+    Deque<Coordinates> findPathTo(Coordinates from, Coordinates to);
 }

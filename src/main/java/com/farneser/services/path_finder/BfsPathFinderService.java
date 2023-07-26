@@ -7,12 +7,13 @@ import java.util.Deque;
 
 public class BfsPathFinderService extends PathFinderService {
 
-    public BfsPathFinderService() {
-        super();
+    public BfsPathFinderService(Map map) {
+        super(map);
     }
 
     @Override
-    public Deque<Coordinates> findPathTo(Map map, Coordinates from, Coordinates to) {
+    public Deque<Coordinates> findPathTo(Coordinates from, Coordinates to) {
+        System.out.println("find path from + " + from.getX() + "-" + from.getY() + " to " + to.getX() + "-" + to.getY());
         return null;
     }
 }
