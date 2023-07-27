@@ -36,6 +36,18 @@ public abstract class PathFinderService implements IPathFinder {
         return result.get();
     }
 
+    protected Set<Coordinates> emptyEntitiesNear(Coordinates coordinates) {
+        var emptyCoordinates = new HashSet<Coordinates>();
+
+        coordinatesToCheck(coordinates).forEach(coordinatesAround -> {
+            if (_map.getEntityAt(coordinatesAround) == null) {
+                emptyCoordinates.add(coordinatesAround);
+            }
+        });
+
+        return emptyCoordinates;
+    }
+
     protected Set<Coordinates> coordinatesToCheck(Coordinates coordinates) {
         var result = new HashSet<Coordinates>();
 
@@ -53,7 +65,7 @@ public abstract class PathFinderService implements IPathFinder {
     }
 
     public static void main(String[] args) {
-        var bfs = new BfsPathFinderService(new Map(3, 3, new ConsoleRenderService()));
+        var bfs = new BfsPathFinderService(new Map(5, 5, new ConsoleRenderService()));
 
         bfs.coordinatesToCheck(new Coordinates(2, 2)).forEach(System.out::println);
         bfs._map.render();
@@ -63,6 +75,7 @@ public abstract class PathFinderService implements IPathFinder {
         System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Predator.class));
         System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Tree.class));
         System.out.println(bfs.isEntityNear(new Coordinates(0, 0), Herbivore.class));
+        bfs.emptyEntitiesNear(new Coordinates(2, 2)).forEach(System.out::println);
 
     }
 }
