@@ -2,18 +2,11 @@ package com.farneser.services.path_finder;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
-import com.farneser.entity.Grass;
-import com.farneser.entity.Rock;
-import com.farneser.entity.Tree;
-import com.farneser.entity.creature.Herbivore;
-import com.farneser.entity.creature.Predator;
 import com.farneser.services.render.console.ConsoleRenderService;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BfsPathFinderService extends PathFinderService {
 

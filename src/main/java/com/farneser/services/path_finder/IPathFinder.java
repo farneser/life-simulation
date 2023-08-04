@@ -1,7 +1,6 @@
 package com.farneser.services.path_finder;
 
 import com.farneser.Coordinates;
-import com.farneser.Map;
 
 import java.util.Deque;
 
