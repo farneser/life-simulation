@@ -39,6 +39,6 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "x: " + _x + ", y: " + _y;
+        return "Coordinates: { x: " + _x + ", y: " + _y + " }";
     }
 }
