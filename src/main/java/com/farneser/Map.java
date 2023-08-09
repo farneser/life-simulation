@@ -78,6 +78,7 @@ public class Map {
     }
 
     public void moveEntity(Coordinates from, Coordinates to) {
+        System.out.println("entity moved from " + from + " to " + to);
         var entity = getEntityAt(from);
 
         removeEntity(from);

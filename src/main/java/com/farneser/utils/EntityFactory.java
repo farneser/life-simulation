@@ -8,7 +8,7 @@ import com.farneser.entity.Rock;
 import com.farneser.entity.Tree;
 import com.farneser.entity.creature.Herbivore;
 import com.farneser.entity.creature.Predator;
-import com.farneser.services.path_finder.BfsPathFinderService;
+import com.farneser.services.path_finder.bfs_path_finder.BfsPathFinderService;
 
 import java.util.Random;
 

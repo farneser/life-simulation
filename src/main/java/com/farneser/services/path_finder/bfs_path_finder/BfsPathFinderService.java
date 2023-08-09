@@ -1,7 +1,8 @@
-package com.farneser.services.path_finder;
+package com.farneser.services.path_finder.bfs_path_finder;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
+import com.farneser.services.path_finder.PathFinderService;
 import com.farneser.services.render.console.ConsoleRenderService;
 
 import java.util.ArrayDeque;
@@ -32,7 +33,13 @@ public class BfsPathFinderService extends PathFinderService {
                 break;
             }
 
-            emptyEntitiesNear(currentNode).forEach(nextNode -> {
+            var entitiesNear = emptyEntitiesNear(currentNode);
+
+            if (coordinatesToCheck(currentNode).stream().anyMatch(c -> c.getX() == coordinatesTo.getX() && c.getY() == coordinatesTo.getY())) {
+                entitiesNear.add(coordinatesTo);
+            }
+
+            entitiesNear.forEach(nextNode -> {
 
                 if (visitedNodes.get(nextNode) == null) {
                     queue.add(nextNode);
@@ -50,7 +57,7 @@ public class BfsPathFinderService extends PathFinderService {
         while (currentNode != coordinatesFrom) {
 
             currentNode = visitedNodes.get(currentNode);
-            path.add(currentNode);
+            path.push(currentNode);
         }
 
         return path;
@@ -59,7 +66,7 @@ public class BfsPathFinderService extends PathFinderService {
     public static void main(String[] args) {
         var bfs = new BfsPathFinderService(new Map(25, 25, new ConsoleRenderService()));
 
-        var queue = bfs.findPathTo(new Coordinates(0, 0), new Coordinates(20, 24));
+        var queue = bfs.findPathTo(new Coordinates(5, 5), new Coordinates(20, 24));
 
         System.out.println("queue");
 

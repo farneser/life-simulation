@@ -2,6 +2,8 @@ package com.farneser.entity.creature;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
+import com.farneser.entity.Grass;
+import com.farneser.entity.Rock;
 import com.farneser.services.path_finder.IPathFinder;
 
 public class Herbivore extends Creature {
@@ -10,8 +12,8 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void makeMove(Coordinates currentCell) {
-        System.out.println("herbivore moved");
+    public void makeMove() {
+        makeMove(new Class[]{Grass.class, Rock.class});
     }
 
     @Override
