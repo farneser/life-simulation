@@ -2,7 +2,6 @@ package com.farneser.entity.creature;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
-import com.farneser.entity.Entity;
 import com.farneser.services.path_finder.IPathFinder;
 
 public class Predator extends Creature {

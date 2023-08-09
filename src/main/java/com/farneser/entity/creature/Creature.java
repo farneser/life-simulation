@@ -3,7 +3,6 @@ package com.farneser.entity.creature;
 import com.farneser.Coordinates;
 import com.farneser.Map;
 import com.farneser.entity.Entity;
-import com.farneser.entity.Grass;
 import com.farneser.services.path_finder.IPathFinder;
 
 import java.util.Deque;
