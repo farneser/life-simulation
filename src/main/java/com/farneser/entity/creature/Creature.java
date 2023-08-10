@@ -57,11 +57,11 @@ public abstract class Creature extends Entity {
             var nearestEntity = new AtomicReference<>(entitiesNear.entrySet().stream().findFirst().get().getValue());
             var pathToEntity = new AtomicReference<>(pathFinder.findPathTo(_coordinates, nearestEntity.get().getCoordinates()));
 
-            entitiesNear.forEach((coordinates, grass) -> {
-                var path = pathFinder.findPathTo(_coordinates, grass.getCoordinates());
+            entitiesNear.forEach((coordinates, entity) -> {
+                var path = pathFinder.findPathTo(_coordinates, entity.getCoordinates());
 
-                if (path != null && pathToEntity.get().size() > path.size()) {
-                    nearestEntity.set(grass);
+                if (path != null && pathToEntity.get().size() >= path.size()) {
+                    nearestEntity.set(entity);
                     nearestPath.set(path);
                 }
             });
@@ -70,9 +70,10 @@ public abstract class Creature extends Entity {
                 nearestPath.set(pathToEntity.get());
             }
         }
-
-        for (var i = 0; i < Math.min(speed, nearestPath.get().size()); i++) {
+        var stepsCount = 0;
+        while (!nearestPath.get().isEmpty() && stepsCount <= speed){
             _map.moveEntity(_coordinates, nearestPath.get().pop());
+            stepsCount++;
         }
     }
 

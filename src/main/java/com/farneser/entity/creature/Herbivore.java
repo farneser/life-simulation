@@ -17,7 +17,7 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove() {
-        makeMove(new Class[]{Grass.class, Rock.class});
+        makeMove(new Class[]{Grass.class});
     }
 
     @Override

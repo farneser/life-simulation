@@ -1,6 +1,5 @@
 package com.farneser;
 
-import com.farneser.entity.Entity;
 import com.farneser.entity.Grass;
 import com.farneser.entity.Tree;
 import com.farneser.entity.creature.Herbivore;
@@ -10,7 +9,6 @@ import junit.framework.TestCase;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.HashMap;
 
 public class BfsPathFinderServiceTest extends TestCase {
 
@@ -78,5 +76,30 @@ public class BfsPathFinderServiceTest extends TestCase {
         }
 
     }
+
+    public void testStepsMove() {
+        _map.render();
+        var creature = _map.getCreatures().get(new Coordinates(6, 0));
+        _map.render();
+
+        var path = findPath(new Coordinates(6, 0), new Coordinates(5, 5));
+
+        while (!path.isEmpty()) {
+            _map.moveEntity(creature.getCoordinates(), path.pop());
+        }
+        _map.render();
+
+    }
+
+    public void testCreatureMakeMove() {
+        _map.render();
+        var creature = _map.getCreatures().get(new Coordinates(6, 0));
+
+        creature.makeMove();
+        _map.render();
+
+
+    }
+
 
 }
