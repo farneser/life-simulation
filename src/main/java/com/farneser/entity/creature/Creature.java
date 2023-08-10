@@ -10,16 +10,31 @@ import java.util.Deque;
 import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class Creature extends Entity {
-    public final int speed;
-    public final int hp;
+    protected int speed;
+    protected int hp;
     public final IPathFinder pathFinder;
     protected final Map _map;
-    public Creature(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
+
+    public Creature(Coordinates coordinates, IPathFinder pathFinder, Map map) {
         super(coordinates);
-        this.speed = speed;
-        this.hp = hp;
+        this.speed = 5;
+        this.hp = 5;
         this.pathFinder = pathFinder;
         _map = map;
+    }
+
+    public Creature(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
+        this(coordinates, pathFinder, map);
+        this.speed = speed;
+        this.hp = hp;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getHp() {
+        return hp;
     }
 
     abstract public void makeMove();
@@ -27,11 +42,12 @@ public abstract class Creature extends Entity {
     public boolean isAlive() {
         return hp > 0;
     }
-    public <T extends Entity> void makeMove(Class<T>[] target){
+
+    public <T extends Entity> void makeMove(Class<T>[] target) {
 
         var nearestPath = new AtomicReference<Deque<Coordinates>>(new ArrayDeque<>());
 
-        for (var entityType: target) {
+        for (var entityType : target) {
             var entitiesNear = _map.getEntitiesOfType(entityType);
 
             if (entitiesNear.isEmpty()) {
@@ -43,13 +59,14 @@ public abstract class Creature extends Entity {
 
             entitiesNear.forEach((coordinates, grass) -> {
                 var path = pathFinder.findPathTo(_coordinates, grass.getCoordinates());
-                if (pathToEntity.get().size() > path.size()) {
+
+                if (path != null && pathToEntity.get().size() > path.size()) {
                     nearestEntity.set(grass);
                     nearestPath.set(path);
                 }
             });
 
-            if (nearestPath.get().size() > pathToEntity.get().size()){
+            if (pathToEntity.get() != null && nearestPath.get().size() > pathToEntity.get().size()) {
                 nearestPath.set(pathToEntity.get());
             }
         }
@@ -58,6 +75,7 @@ public abstract class Creature extends Entity {
             _map.moveEntity(_coordinates, nearestPath.get().pop());
         }
     }
+
     @Override
     public String toString() {
         return "Creature\n\tspeed: " + speed + "\n\thp: " + hp + "\n\tcoordinates: " + getCoordinates();

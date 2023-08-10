@@ -7,6 +7,10 @@ import com.farneser.entity.Rock;
 import com.farneser.services.path_finder.IPathFinder;
 
 public class Herbivore extends Creature {
+    public Herbivore(Coordinates coordinates, IPathFinder pathFinder, Map map){
+        super(coordinates, pathFinder, map);
+    }
+
     public Herbivore(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
         super(coordinates, speed, hp, pathFinder, map);
     }

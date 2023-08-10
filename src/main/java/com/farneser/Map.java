@@ -13,10 +13,9 @@ import java.util.Random;
 public class Map {
 
     private final IRender _render;
-    private final HashMap<Coordinates, Entity> _entities = new HashMap<>();
+    private HashMap<Coordinates, Entity> _entities = new HashMap<>();
     public final int width;
     public final int height;
-
 
     public Map(int width, int height, IRender render) {
         _render = render;
@@ -24,8 +23,14 @@ public class Map {
         this.width = width;
         this.height = height;
 
+    }
+
+    public void fillMapWithRandomEntities() {
+
         var entityFactory = new EntityFactory(this);
+
         var random = new Random();
+
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (random.nextInt(10) != 0) continue;
