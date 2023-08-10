@@ -5,6 +5,7 @@ import com.farneser.Map;
 import com.farneser.entity.Entity;
 import com.farneser.services.path_finder.IPathFinder;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -28,7 +29,7 @@ public abstract class Creature extends Entity {
     }
     public <T extends Entity> void makeMove(Class<T>[] target){
 
-        var nearestPath = new AtomicReference<Deque<Coordinates>>();
+        var nearestPath = new AtomicReference<Deque<Coordinates>>(new ArrayDeque<>());
 
         for (var entityType: target) {
             var entitiesNear = _map.getEntitiesOfType(entityType);

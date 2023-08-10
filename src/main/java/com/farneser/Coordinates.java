@@ -24,7 +24,7 @@ public class Coordinates {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Coordinates that = (Coordinates) o;
+        var that = (Coordinates) o;
         return _x == that._x && _y == that._y;
     }
 
