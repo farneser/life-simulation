@@ -57,7 +57,14 @@ public class BfsPathFinderService extends PathFinderService {
         while (currentNode != coordinatesFrom) {
 
             currentNode = visitedNodes.get(currentNode);
-            path.push(currentNode);
+
+            if (currentNode == null){
+                return null;
+            }
+
+            if (currentNode != coordinatesFrom){
+                path.push(currentNode);
+            }
         }
 
         return path;
