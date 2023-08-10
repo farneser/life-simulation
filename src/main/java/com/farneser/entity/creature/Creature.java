@@ -10,37 +10,37 @@ import java.util.Deque;
 import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class Creature extends Entity {
-    protected int speed;
-    protected int hp;
+    protected int _speed;
+    protected int _hp;
     public final IPathFinder pathFinder;
     protected final Map _map;
 
     public Creature(Coordinates coordinates, IPathFinder pathFinder, Map map) {
         super(coordinates);
-        this.speed = 5;
-        this.hp = 5;
+        this._speed = 5;
+        this._hp = 5;
         this.pathFinder = pathFinder;
         _map = map;
     }
 
     public Creature(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
         this(coordinates, pathFinder, map);
-        this.speed = speed;
-        this.hp = hp;
+        this._speed = speed;
+        this._hp = hp;
     }
 
     public int getSpeed() {
-        return speed;
+        return _speed;
     }
 
     public int getHp() {
-        return hp;
+        return _hp;
     }
 
     abstract public void makeMove();
 
     public boolean isAlive() {
-        return hp > 0;
+        return _hp > 0;
     }
 
     public <T extends Entity> void makeMove(Class<T>[] target) {
@@ -71,14 +71,15 @@ public abstract class Creature extends Entity {
             }
         }
         var stepsCount = 0;
-        while (!nearestPath.get().isEmpty() && stepsCount <= speed){
+        while (!nearestPath.get().isEmpty() && stepsCount <= _speed){
             _map.moveEntity(_coordinates, nearestPath.get().pop());
+            _hp--;
             stepsCount++;
         }
     }
 
     @Override
     public String toString() {
-        return "Creature\n\tspeed: " + speed + "\n\thp: " + hp + "\n\tcoordinates: " + getCoordinates();
+        return "Creature\n\tspeed: " + _speed + "\n\thp: " + _hp + "\n\tcoordinates: " + getCoordinates();
     }
 }
