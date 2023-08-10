@@ -13,7 +13,7 @@ import java.util.Random;
 public class Map {
 
     private final IRender _render;
-    private HashMap<Coordinates, Entity> _entities = new HashMap<>();
+    private final HashMap<Coordinates, Entity> _entities = new HashMap<>();
     public final int width;
     public final int height;
 

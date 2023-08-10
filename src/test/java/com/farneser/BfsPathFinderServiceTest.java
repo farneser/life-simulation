@@ -18,7 +18,6 @@ public class BfsPathFinderServiceTest extends TestCase {
 
     public BfsPathFinderServiceTest(String testName) {
         super(testName);
-        var entities = new HashMap<Coordinates, Entity>();
 
         _map = new Map(15, 15, new ConsoleRenderService());
 

@@ -11,6 +11,7 @@ public class Simulation extends Thread {
 
     public Simulation(Map map) {
         _map = map;
+        _map.fillMapWithRandomEntities();
         _turnCounter = 0;
     }
 
@@ -27,7 +28,7 @@ public class Simulation extends Thread {
                 var coordinates = new Coordinates(x, y);
                 var entity = _map.getEntityAt(coordinates);
 
-                if (entity instanceof Creature){
+                if (entity instanceof Creature) {
 
                     ((Creature) entity).makeMove();
                 }

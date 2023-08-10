@@ -12,7 +12,7 @@ public class ConsoleRenderService implements IRender {
         super();
     }
 
-    private void cleanConsole(){
+    private void cleanConsole() {
         final var cleanString = "\033[H\033[2J";
         System.out.print(cleanString);
         System.out.flush();
