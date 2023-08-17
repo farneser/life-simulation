@@ -18,7 +18,7 @@ public class BfsPathFinderServiceTest extends TestCase {
     public BfsPathFinderServiceTest(String testName) {
         super(testName);
 
-        _map = new Map(15, 15, new ConsoleRenderService());
+        _map = new Map(15, 15, new ConsoleRenderService(true));
 
         _map.setEntityAt(new Coordinates(1, 0), new Tree(new Coordinates(0, 0)));
         _map.setEntityAt(new Coordinates(0, 1), new Tree(new Coordinates(0, 0)));
