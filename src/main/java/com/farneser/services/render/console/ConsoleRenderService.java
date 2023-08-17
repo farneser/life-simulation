@@ -8,8 +8,17 @@ import com.farneser.services.render.IRender;
 import java.util.Random;
 
 public class ConsoleRenderService implements IRender {
+    private boolean _isSimpleMode;
+
     public ConsoleRenderService() {
-        super();
+        _isSimpleMode = false;
+    }
+
+    /**
+     * @param mode define how console renderer works (true:= char, false:= emoji)
+     */
+    public ConsoleRenderService(boolean mode) {
+        _isSimpleMode = mode;
     }
 
     private void cleanConsole() {
@@ -39,6 +48,19 @@ public class ConsoleRenderService implements IRender {
 
     private String selectUnicodeSpriteForEntity(Entity entity) {
         if (entity == null) return "..";
+
+        if (_isSimpleMode) {
+
+            return switch (entity.getClass().getSimpleName()) {
+                case "Grass" -> "G";
+                case "Rock" -> "R";
+                case "Tree" -> "T";
+                case "Herbivore" -> "H";
+                case "Predator" -> "P";
+                default -> "..";
+            };
+
+        }
 
         var random = new Random();
 
