@@ -9,6 +9,8 @@ import com.farneser.services.path_finder.IPathFinder;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class Creature extends Entity {
     protected int _speed;
@@ -16,6 +18,7 @@ public abstract class Creature extends Entity {
     public final IPathFinder pathFinder;
     protected final Map _map;
     private int _remainingSpeed;
+    private final Logger _logger = Logger.getLogger(Creature.class.getName());
 
     public Creature(Coordinates coordinates, IPathFinder pathFinder, Map map) {
         super(coordinates);
@@ -90,6 +93,8 @@ public abstract class Creature extends Entity {
 
         if (entity != null) {
             _healthPoints += entity.getFoodFromDamage(5);
+
+            _logger.log(Level.INFO, this.getClass().getSimpleName() + " in " + this._coordinates + " damage " + entity.getClass().getSimpleName() + " in " + coordinates);
 
             if (entity.getHealth() <= 0) {
                 _map.removeEntity(coordinates);

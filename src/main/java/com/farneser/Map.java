@@ -8,6 +8,8 @@ import com.farneser.utils.EntityFactory;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Map {
@@ -16,13 +18,13 @@ public class Map {
     private final HashMap<Coordinates, Entity> _entities = new HashMap<>();
     public final int width;
     public final int height;
+    private final Logger _logger = Logger.getLogger(Map.class.getName());
 
     public Map(int width, int height, IRender render) {
         _render = render;
 
         this.width = width;
         this.height = height;
-
     }
 
     public void fillMapWithRandomEntities() {
@@ -83,7 +85,6 @@ public class Map {
     }
 
     public void moveEntity(Coordinates from, Coordinates to) {
-        System.out.println("entity moved from " + from + " to " + to);
 
         var entity = getEntityAt(from);
 
@@ -92,6 +93,7 @@ public class Map {
 
         entity.setCoordinates(to);
 
+        _logger.log(Level.INFO, entity.getClass().getSimpleName() + " from " + from + " moved to " + to);
     }
 
     public void render() {
