@@ -22,10 +22,10 @@ public abstract class PathFinderService implements IPathFinder {
         _map = map;
     }
 
-    protected <T extends Entity> Coordinates isEntityNear(Coordinates coordinates, Class<T> type) {
+    public <T extends Entity> Coordinates isEntityNear(Coordinates coordinates, Class<T> type) {
 
         var coordinatesToCheck = coordinatesToCheck(coordinates);
-        AtomicReference<Coordinates> result = new AtomicReference<>();
+        AtomicReference<Coordinates> result = new AtomicReference<>(null);
         coordinatesToCheck.forEach(coordinatesAround -> {
             var entity = _map.getEntityAt(coordinatesAround);
             if (entity == null) return;
@@ -35,6 +35,20 @@ public abstract class PathFinderService implements IPathFinder {
         });
 
         return result.get();
+    }
+
+    public <T extends Entity> Coordinates isEntityNear(Coordinates coordinates, Class<T>[] types) {
+
+        for (var type : types) {
+            var entityCoordinates = isEntityNear(coordinates, type);
+
+            if (entityCoordinates != null){
+                return entityCoordinates;
+            }
+
+        }
+
+        return null;
     }
 
     protected Set<Coordinates> emptyEntitiesNear(Coordinates coordinates) {
