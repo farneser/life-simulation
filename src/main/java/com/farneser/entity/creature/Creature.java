@@ -69,6 +69,7 @@ public abstract class Creature extends Entity {
         }
 
         while (getRemainingSpeed() > 0) {
+            _remainingSpeed--;
             var entityCoordinates = pathFinder.isEntityNear(_coordinates, target);
 
             if (entityCoordinates != null) {
