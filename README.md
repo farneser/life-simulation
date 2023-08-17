@@ -14,7 +14,7 @@
 
 ## Что нужно знать
 
-- [Java]({{ site.baseurl }}/Technologies/Java/) - коллекции, ООП
+- [Java](https://zhukovsd.github.io/java-backend-learning-course/Technologies/Java/) - коллекции, ООП
 
 ## Мотивация проекта
 
