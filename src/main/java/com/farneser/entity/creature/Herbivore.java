@@ -2,7 +2,6 @@ package com.farneser.entity.creature;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
-import com.farneser.entity.Entity;
 import com.farneser.entity.Grass;
 import com.farneser.entity.IDevoured;
 import com.farneser.services.path_finder.IPathFinder;
@@ -32,5 +31,10 @@ public class Herbivore extends Creature implements IDevoured {
 
         return (damage / 2) + (_healthPoints % 5);
 
+    }
+
+    @Override
+    public int getHealth() {
+        return _healthPoints;
     }
 }

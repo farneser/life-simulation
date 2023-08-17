@@ -16,4 +16,9 @@ public class Grass extends Entity implements IDevoured {
     public int getFoodFromDamage(int damage) {
         return 15 + (damage % 10);
     }
+
+    @Override
+    public int getHealth() {
+        return 0;
+    }
 }

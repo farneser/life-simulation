@@ -3,7 +3,6 @@ package com.farneser.entity.creature;
 import com.farneser.Coordinates;
 import com.farneser.Map;
 import com.farneser.entity.Entity;
-import com.farneser.entity.Grass;
 import com.farneser.entity.IDevoured;
 import com.farneser.services.path_finder.IPathFinder;
 
@@ -32,19 +31,7 @@ public abstract class Creature extends Entity {
         this._healthPoints = hp;
     }
 
-    public int getSpeed() {
-        return _speed;
-    }
-
-    public int getHp() {
-        return _healthPoints;
-    }
-
     abstract public void makeMove();
-
-    public boolean isAlive() {
-        return _healthPoints > 0;
-    }
 
     public <T extends Entity> void makeMove(Class<T>[] target) {
         _remainingSpeed = _speed;
@@ -81,7 +68,7 @@ public abstract class Creature extends Entity {
             _remainingSpeed--;
         }
 
-        if (getRemainingSpeed() > 0) {
+        while (getRemainingSpeed() > 0) {
             var entityCoordinates = pathFinder.isEntityNear(_coordinates, target);
 
             if (entityCoordinates != null) {
@@ -96,15 +83,17 @@ public abstract class Creature extends Entity {
         return _remainingSpeed;
     }
 
-    protected void eat(Coordinates coordinates){
+    protected void eat(Coordinates coordinates) {
 
         var entity = (IDevoured) _map.getEntityAt(coordinates);
 
         if (entity != null) {
             _healthPoints += entity.getFoodFromDamage(5);
 
-            _map.removeEntity(coordinates);
-            _map.moveEntity(_coordinates, coordinates);
+            if (entity.getHealth() <= 0) {
+                _map.removeEntity(coordinates);
+                _map.moveEntity(_coordinates, coordinates);
+            }
         }
     }
 
