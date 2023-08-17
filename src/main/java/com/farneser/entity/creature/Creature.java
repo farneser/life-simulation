@@ -60,7 +60,7 @@ public abstract class Creature extends Entity {
             entitiesNear.forEach((coordinates, entity) -> {
                 var path = pathFinder.findPathTo(_coordinates, entity.getCoordinates());
 
-                if (path != null && pathToEntity.get().size() >= path.size()) {
+                if (path != null && pathToEntity.get() != null && pathToEntity.get().size() >= path.size()) {
                     nearestEntity.set(entity);
                     nearestPath.set(path);
                 }
