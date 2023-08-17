@@ -1,5 +1,7 @@
 # Второе задание курса [java-backend-learning-course](https://zhukovsd.github.io/java-backend-learning-course/)
 
+[![Java CI with Maven](https://github.com/farneser/life-simulation/actions/workflows/maven.yml/badge.svg)](https://github.com/farneser/life-simulation/actions/workflows/maven.yml)
+
 ## [Задание](https://zhukovsd.github.io/java-backend-learning-course/Projects/Simulation/)
 
 Задание подразумевает разработку пошаговой симуляции 2D мира
