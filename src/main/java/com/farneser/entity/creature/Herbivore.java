@@ -19,16 +19,6 @@ public class Herbivore extends Creature implements IDevoured {
     @Override
     public void makeMove() {
         makeMove(new Class[]{Grass.class});
-
-        if (getRemainingSpeed() > 0) {
-            var entityCoordinates = pathFinder.isEntityNear(_coordinates, Grass.class);
-
-            if (entityCoordinates != null) {
-                eat(entityCoordinates);
-            }
-
-        }
-
     }
 
     @Override
