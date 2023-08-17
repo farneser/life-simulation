@@ -1,9 +1,10 @@
-package com.farneser;
+package com.farneser.services.path_finder.bfs_path_finder;
 
+import com.farneser.Coordinates;
+import com.farneser.Map;
 import com.farneser.entity.Grass;
 import com.farneser.entity.Tree;
 import com.farneser.entity.creature.Herbivore;
-import com.farneser.services.path_finder.bfs_path_finder.BfsPathFinderService;
 import com.farneser.services.render.console.ConsoleRenderService;
 import junit.framework.TestCase;
 
@@ -43,6 +44,7 @@ public class BfsPathFinderServiceTest extends TestCase {
         }
 
         var correctPath = new ArrayDeque<Coordinates>();
+
         correctPath.add(new Coordinates(7, 1));
         correctPath.add(new Coordinates(8, 2));
         correctPath.add(new Coordinates(7, 3));
@@ -87,6 +89,7 @@ public class BfsPathFinderServiceTest extends TestCase {
         while (!path.isEmpty()) {
             _map.moveEntity(creature.getCoordinates(), path.pop());
         }
+
         _map.render();
 
     }
@@ -98,8 +101,6 @@ public class BfsPathFinderServiceTest extends TestCase {
         creature.makeMove();
         _map.render();
 
-
     }
-
 
 }

@@ -2,11 +2,12 @@ package com.farneser.entity.creature;
 
 import com.farneser.Coordinates;
 import com.farneser.Map;
+import com.farneser.entity.Entity;
 import com.farneser.entity.Grass;
-import com.farneser.entity.Rock;
+import com.farneser.entity.IDevoured;
 import com.farneser.services.path_finder.IPathFinder;
 
-public class Herbivore extends Creature {
+public class Herbivore extends Creature implements IDevoured {
     public Herbivore(Coordinates coordinates, IPathFinder pathFinder, Map map) {
         super(coordinates, pathFinder, map);
     }
@@ -18,10 +19,28 @@ public class Herbivore extends Creature {
     @Override
     public void makeMove() {
         makeMove(new Class[]{Grass.class});
+
+        if (getRemainingSpeed() > 0) {
+            var entityCoordinates = pathFinder.isEntityNear(_coordinates, Grass.class);
+
+            if (entityCoordinates != null) {
+                eat(entityCoordinates);
+            }
+
+        }
+
     }
 
     @Override
     public String toString() {
         return super.toString() + "\n\ttype: herbivore";
+    }
+
+    @Override
+    public int getFoodFromDamage(int damage) {
+        _healthPoints -= damage;
+
+        return (damage / 2) + (_healthPoints % 5);
+
     }
 }

@@ -16,7 +16,7 @@ public interface IPathFinder {
     Deque<Coordinates> findPathTo(Coordinates from, Coordinates to);
 
     /**
-     * Method to get coordinates of nearest Entity of type near coordinates
+     * Method to get coordinates of nearest Entity by type near coordinates
      *
      * @param coordinates define coordinates to check
      * @param type define type to find
@@ -25,7 +25,7 @@ public interface IPathFinder {
     <T extends Entity> Coordinates isEntityNear(Coordinates coordinates, Class<T> type);
 
     /**
-     * Method to get coordinates of nearest Entity of types near coordinates
+     * Method to get coordinates of nearest Entity by types near coordinates
      *
      * @param coordinates define coordinates to check
      * @param type define types to find

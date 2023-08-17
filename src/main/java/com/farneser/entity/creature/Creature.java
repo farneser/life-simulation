@@ -3,6 +3,7 @@ package com.farneser.entity.creature;
 import com.farneser.Coordinates;
 import com.farneser.Map;
 import com.farneser.entity.Entity;
+import com.farneser.entity.IDevoured;
 import com.farneser.services.path_finder.IPathFinder;
 
 import java.util.ArrayDeque;
@@ -11,14 +12,15 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public abstract class Creature extends Entity {
     protected int _speed;
-    protected int _hp;
+    protected int _healthPoints;
     public final IPathFinder pathFinder;
     protected final Map _map;
+    private int _remainingSpeed;
 
     public Creature(Coordinates coordinates, IPathFinder pathFinder, Map map) {
         super(coordinates);
         this._speed = 5;
-        this._hp = 5;
+        this._healthPoints = 5;
         this.pathFinder = pathFinder;
         _map = map;
     }
@@ -26,7 +28,7 @@ public abstract class Creature extends Entity {
     public Creature(Coordinates coordinates, int speed, int hp, IPathFinder pathFinder, Map map) {
         this(coordinates, pathFinder, map);
         this._speed = speed;
-        this._hp = hp;
+        this._healthPoints = hp;
     }
 
     public int getSpeed() {
@@ -34,16 +36,17 @@ public abstract class Creature extends Entity {
     }
 
     public int getHp() {
-        return _hp;
+        return _healthPoints;
     }
 
     abstract public void makeMove();
 
     public boolean isAlive() {
-        return _hp > 0;
+        return _healthPoints > 0;
     }
 
     public <T extends Entity> void makeMove(Class<T>[] target) {
+        _remainingSpeed = _speed;
 
         var nearestPath = new AtomicReference<Deque<Coordinates>>(new ArrayDeque<>());
 
@@ -70,16 +73,32 @@ public abstract class Creature extends Entity {
                 nearestPath.set(pathToEntity.get());
             }
         }
-        var stepsCount = 0;
-        while (!nearestPath.get().isEmpty() && stepsCount <= _speed){
+
+        while (!nearestPath.get().isEmpty() && _remainingSpeed > 0) {
             _map.moveEntity(_coordinates, nearestPath.get().pop());
-            _hp--;
-            stepsCount++;
+            _healthPoints--;
+            _remainingSpeed--;
+        }
+    }
+
+    protected int getRemainingSpeed() {
+        return _remainingSpeed;
+    }
+
+    protected void eat(Coordinates coordinates){
+
+        var entity = (IDevoured) _map.getEntityAt(coordinates);
+
+        if (entity != null) {
+            _healthPoints += entity.getFoodFromDamage(5);
+
+            _map.removeEntity(coordinates);
+            _map.moveEntity(_coordinates, coordinates);
         }
     }
 
     @Override
     public String toString() {
-        return "Creature\n\tspeed: " + _speed + "\n\thp: " + _hp + "\n\tcoordinates: " + getCoordinates();
+        return "Creature\n\tspeed: " + _speed + "\n\thp: " + _healthPoints + "\n\tcoordinates: " + getCoordinates();
     }
 }
